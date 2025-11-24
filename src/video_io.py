@@ -10,10 +10,18 @@ def openVideo(videoRoute):
         return video
     else:
         raise Exception(f"El archivo no existe: {videoRoute}")
-
-
-
-
+    
+def openFrames(videoRoute):
+    capturador = openVideo(videoRoute)
+    for i in range(int(capturador.get(cv2.CAP_PROP_FRAME_COUNT))):
+        ret, frame = capturador.read()
+        if not ret:
+            break
+        yield frame
+    capturador.release()
+        
+            
+        
 
 
 
